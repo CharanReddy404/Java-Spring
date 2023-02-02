@@ -33,7 +33,11 @@ public class EmployeeController {
 	@RequestMapping("/saveProcess")
 	public String saveProcess(@ModelAttribute("employee") Employee employee) {
 		System.out.println("Employee: "+employee);
-		mapper.saveEmployee(employee);
+		if(employee.getId() == null) {
+			mapper.saveEmployee(employee);
+		}else {
+			mapper.updateEmployee(employee);
+		}
 		return "redirect:/";
 	}
 	
@@ -43,4 +47,15 @@ public class EmployeeController {
 		mapper.deleteEmployee(employeeId);
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/editemployee")
+	public ModelAndView editEmployee(@RequestParam("employeeId") int employeeId) {
+		ModelAndView mav = new ModelAndView("add-employee");
+		System.out.println("\nEmployeeId: "+employeeId);
+		Employee employee = mapper.findById(employeeId);
+		System.out.println("\nEmployee: "+employee);
+		mav.addObject("employee",employee);
+		return mav;
+	}
+	
 }

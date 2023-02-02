@@ -8,8 +8,11 @@
 <title>Add Employee</title>
 </head>
 <body>
-	<h1>Add Employee</h1>
+	<h1>Employee</h1>
 	<s:form action="saveProcess" modelAttribute="employee">
+		
+		<input type="hidden" id="hiddenTxt" value ="${employee.hobbies}">
+		<s:hidden path="id" />
 		
 		Employee Name: <s:input path="fullname"/><br/>
 		<br/>
@@ -38,5 +41,21 @@
 		<input type="submit" value="Save Employee" />
 		
 	</s:form>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			
+			var hobbies = $("#hiddenTxt").val().split(",");
+			var $checkboxes = $("input[type=checkbox]");
+			$checkboxes.each(function(id,element){
+				if(hobbies.indexOf(element.value)!=-1){
+					element.setAttribute("checked","checked");
+				}else{
+					element.removeAttribute("checked");
+				}
+			});
+		});
+	</script>
 </body>
 </html>

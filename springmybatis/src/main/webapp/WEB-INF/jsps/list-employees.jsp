@@ -28,6 +28,10 @@
 				<c:url var="deletelink" value="/deleteemployee">
 					<c:param name="employeeId" value="${e.id}" />
 				</c:url>
+				<c:url var="updatelink" value="/editemployee">
+					<c:param name="employeeId" value="${e.id}" />
+				</c:url>
+				
 				<tr>
 					<td>${e.fullname}</td>
 					<td>${e.email}</td>
@@ -36,6 +40,7 @@
 					<td>${e.country}</td>
 					<td>${e.address}</td>
 					<td>
+						<a href="${updatelink}" >Update</a> |
 						<a href="${deletelink}" 
 							onclick="if(!(confirm('Are you sure want to delete the record'))) return false;">
 							Delete
