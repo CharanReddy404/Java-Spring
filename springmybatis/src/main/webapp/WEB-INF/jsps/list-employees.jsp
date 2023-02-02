@@ -21,8 +21,13 @@
 				<td>Hobbies</td>
 				<td>Country</td>
 				<td>Address</td>
+				<td>Actions</td>
 			</tr>
 			<c:forEach items="${listemployees}" var="e">
+			
+				<c:url var="deletelink" value="/deleteemployee">
+					<c:param name="employeeId" value="${e.id}" />
+				</c:url>
 				<tr>
 					<td>${e.fullname}</td>
 					<td>${e.email}</td>
@@ -30,6 +35,12 @@
 					<td>${e.hobbies}</td>
 					<td>${e.country}</td>
 					<td>${e.address}</td>
+					<td>
+						<a href="${deletelink}" 
+							onclick="if(!(confirm('Are you sure want to delete the record'))) return false;">
+							Delete
+						</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
